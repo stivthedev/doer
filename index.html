@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>$DOER</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vercel/geist@1.0.0/style.css">
+
+    <style>
+        :root {
+            --bg: #0c1b12;
+            --peach: #caa64b;
+            --peach2: #f0d27b;
+            --peach-soft: #2b3a28;
+            --text: #ffffff;
+            --muted: #c7b57a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Geist", system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+
+        header {
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            font-family: "Geist Mono", monospace;
+            font-size: 12px;
+            color: var(--text);
+        }
+
+        /* HERO */
+
+        .hero {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 40px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(4rem, 10vw, 9rem);
+            line-height: .9;
+            background: linear-gradient(45deg, var(--peach), var(--peach2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            margin-top: 20px;
+            color: var(--muted);
+            max-width: 420px;
+            font-family: "Geist Mono", monospace;
+        }
+
+        /* peach box */
+
+        .peach-box {
+            background: #132417;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .peach-box img {
+            width: 100%;
+            max-width: 280px;
+            image-rendering: pixelated;
+        }
+
+        /* buttons */
+
+        button {
+            margin-top: 40px;
+            padding: 14px 28px;
+            background: linear-gradient(45deg, var(--peach), var(--peach2));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-family: "Geist Mono", monospace;
+            cursor: pointer;
+        }
+
+        .twitter-btn {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 12px 26px;
+            border-radius: 10px;
+            border: 1px solid #6f5a2a;
+            font-family: "Geist Mono", monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: #f0d27b;
+        }
+
+        .twitter-btn:hover {
+            background: #caa64b;
+            color: #0c1b12;
+        }
+
+        /* ticker */
+
+        .ticker {
+            margin-top: 80px;
+            background: linear-gradient(90deg, var(--peach), var(--peach2));
+            color: white;
+            padding: 14px 0;
+            overflow: hidden;
+        }
+
+        .ticker span {
+            white-space: nowrap;
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 20s linear infinite;
+            font-family: "Geist Mono", monospace;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-100%)
+            }
+        }
+
+        /* JUICE INDEX */
+
+        .juice-index {
+            max-width: 1000px;
+            margin: 120px auto;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .chart {
+            height: 220px;
+            background: #0f2216;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+        }
+
+        .line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background: linear-gradient(180deg,
+                    transparent 40%,
+                    rgba(202, 166, 75, .3));
+
+            clip-path: polygon(0% 80%,
+                    15% 70%,
+                    30% 75%,
+                    45% 50%,
+                    60% 55%,
+                    75% 30%,
+                    90% 35%,
+                    100% 10%,
+                    100% 100%,
+                    0% 100%);
+        }
+
+        .juice-labels {
+            display: flex;
+            justify-content: space-between;
+            font-family: "Geist Mono", monospace;
+            color: #bca86a;
+            margin-top: 10px;
+        }
+
+        /* timeline */
+
+        .timeline {
+            max-width: 1000px;
+            margin: 120px auto;
+            padding: 0 40px;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .time-card {
+            background: #0f2216;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .time-card span {
+            font-family: "Geist Mono", monospace;
+            font-size: 12px;
+            color: var(--peach);
+        }
+
+        .time-card p {
+            margin-top: 10px;
+            font-family: "Geist Mono", monospace;
+            color: #ffffff;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, var(--peach), var(--peach2));
+            color: white;
+        }
+
+        /* why peach */
+
+        .why-peach {
+            max-width: 1000px;
+            margin: 120px auto;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        .why-grid p {
+            font-family: "Geist Mono", monospace;
+            color: #c7b57a;
+        }
+
+        .peach-manifesto {
+            margin-top: 60px;
+            font-size: 42px;
+            color: var(--peach);
+        }
+
+        /* particles */
+
+        .juice-particle {
+            position: absolute;
+            font-size: 18px;
+            animation: juiceBurst 1.2s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes juiceBurst {
+            0% {
+                opacity: 1;
+                transform: translateY(0)
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-80px)
+            }
+        }
+
+        /* fade text */
+
+        .fade-text {
+            text-align: center;
+            margin-top: 120px;
+            font-size: 48px;
+            opacity: 0;
+            transition: opacity 2s ease;
+            color: var(--peach);
+        }
+
+        .fade-text.show {
+            opacity: 1;
+        }
+
+        footer {
+            margin-top: 120px;
+            padding: 40px;
+            text-align: center;
+            font-family: "Geist Mono", monospace;
+            color: #c7b57a;
+        }
+
+        @media(max-width:900px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo"></div>
+
+
+    </header>
+
+    <section class="hero">
+
+        <div>
+
+            <h1>$DOER</h1>
+
+            <p>
+                He studies charts for hours.<br>
+                Draws perfect entries.<br>
+                Calls every move in advance.
+            </p>
+
+            <button onclick="juice()">PUSH THE DOER BUTTON</button>
+
+            <a href="https://twitter.com/YOURACCOUNT" class="twitter-btn" target="_blank">
+                FOLLOW ON X
+            </a>
+
+            <p id="juiceText" style="margin-top:20px;font-family:monospace;color:#c7b57a;"></p>
+
+        </div>
+
+        <div class="peach-box">
+            <img src="logo.jpg" alt="Doer Logo">
+            <p>golden doer energy</p>
+        </div>
+
+    </section>
+
+    <div class="ticker">
+        <span>
+            charts studied • entries drawn • every move called • “this is the setup” • “this is the moment” •
+            never clicks buy • market moves • he watches •
+        </span>
+    </div>
+
+    <section class="why-peach" id="story">
+
+        <h2>DOER STORY</h2>
+
+        <p
+            style="font-family:monospace;color:#c7b57a;margin-top:20px;max-width:720px;margin-left:auto;margin-right:auto;">
+            “This is the setup.”<br>
+            “This is the moment.”
+        </p>
+
+        <p
+            style="font-family:monospace;color:#c7b57a;margin-top:20px;max-width:720px;margin-left:auto;margin-right:auto;">
+            But he never clicks buy.<br>
+            The market moves.<br>
+            He watches.
+        </p>
+
+    </section>
+
+    <section class="juice-index" id="index">
+
+        <h2>DOER INDEX</h2>
+
+        <p style="font-family:monospace;color:#c7b57a">
+            chart precision high • execution zero • doer stays idle
+        </p>
+
+        <div class="chart">
+            <div class="line"></div>
+        </div>
+
+        <div class="juice-labels">
+            <span>study</span>
+            <span>draw</span>
+            <span>hesitate</span>
+            <span>DOER</span>
+        </div>
+
+    </section>
+
+    <section class="timeline">
+
+        <h2 style="text-align:center;margin-bottom:40px">DOER TIMELINE</h2>
+
+        <div class="timeline-grid">
+
+            <div class="time-card">
+                <span>HOUR 1</span>
+                <p>Charts studied for hours.</p>
+            </div>
+
+            <div class="time-card">
+                <span>HOUR 3</span>
+                <p>Perfect entries drawn.</p>
+            </div>
+
+            <div class="time-card">
+                <span>HOUR 7</span>
+                <p>Every move called in advance.</p>
+            </div>
+
+            <div class="time-card">
+                <span>HOUR 10</span>
+                <p>“This is the setup.”</p>
+            </div>
+
+            <div class="time-card highlight">
+                <span>HOUR 11</span>
+                <p>But he never clicks buy.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="why-peach" id="why">
+
+        <h2>WHY DOER</h2>
+
+        <div class="why-grid">
+
+            <div>
+                <h3>The Charts</h3>
+                <p>
+                    He studies charts for hours.<br>
+                    He draws perfect entries.<br>
+                    He calls every move.
+                </p>
+            </div>
+
+            <div>
+                <h3>The Call</h3>
+                <p>
+                    “This is the setup.”<br>
+                    “This is the moment.”<br>
+                    Still no click.
+                </p>
+            </div>
+
+            <div>
+                <h3>The Doer</h3>
+                <p>
+                    But he never clicks buy.<br>
+                    The market moves.<br>
+                    He watches.
+                </p>
+            </div>
+
+        </div>
+
+        <h3 class="peach-manifesto">He stays a doer.</h3>
+
+    </section>
+
+    <div class="fade-text" id="fadeText">
+        PERFECT SETUPS<br>
+        ZERO CLICKS
+    </div>
+
+    <footer>
+        © DOER
+    </footer>
+
+    <script>
+
+        function juice() {
+
+            const phrases = [
+                "DOER LEVEL: MAXIMUM",
+                "NO ACTION DETECTED",
+                "DOER CONFIRMED",
+                "PLANNING MODE ACTIVE",
+                "THINKING HARD • DOING NONE"
+            ]
+
+            const msg = phrases[Math.floor(Math.random() * phrases.length)]
+
+            document.getElementById("juiceText").innerText = msg
+
+            spawnJuice()
+
+        }
+
+        function spawnJuice() {
+
+            for (let i = 0; i < 12; i++) {
+
+                const p = document.createElement("div")
+                p.className = "juice-particle"
+                p.innerText = "🧍"
+
+                p.style.left = Math.random() * 100 + "%"
+                p.style.top = Math.random() * 80 + "%"
+
+                document.body.appendChild(p)
+
+                setTimeout(() => p.remove(), 1200)
+
+            }
+
+        }
+
+        setTimeout(() => {
+            document.getElementById("fadeText").classList.add("show")
+        }, 3000)
+
+    </script>
+
+</body>
+
+</html>
